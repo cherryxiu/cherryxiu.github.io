@@ -739,6 +739,7 @@ img::-moz-selection {
     width: 100%;
     border-color: #666;
     color: #666;
+    font-size: 14px;
     /*opacity: .8; */
   }
 
