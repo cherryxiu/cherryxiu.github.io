@@ -818,6 +818,7 @@ img::-moz-selection {
   }
   .post-list li {
     margin: 0 0 2.2em 0;
+    padding-bottom: 0.7em;
     float: left;
 
     -moz-box-shadow:4px 4px 4px #efefef, 
@@ -1063,7 +1064,7 @@ input[type="tel"]:-ms-input-placeholder {
   }
 
   .panel-subtitle {
-    font-size: 0.6em; }
+    font-size: 0.74em; }
 
   .panel-cover__description {
     margin: 0 10px;
