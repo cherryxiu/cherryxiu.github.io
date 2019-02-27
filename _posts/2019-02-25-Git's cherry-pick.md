@@ -3,7 +3,7 @@ layout: post
 title: "Git操作之cherrypick"
 date: 2019-02-25
 description: "Git操作，cherry-pick，切换分支提交"
-tag: Git 教程
+tag: Git
 
 ---
 

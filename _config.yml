@@ -73,3 +73,4 @@ paginate: 20
 paginate_path: "page/:num/"
 
 markdown: kramdown
+excerpt_separator: "\n\n\n"
