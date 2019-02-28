@@ -47,7 +47,7 @@ ga:
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
 
 
-permalink: /:year/:month/:day/:title/
+permalink: /:year/:month/:title/
 # Format
 highlighter: rouge
 
@@ -73,4 +73,3 @@ paginate: 20
 paginate_path: "page/:num/"
 
 markdown: kramdown
-excerpt_separator: "\n\n\n"
