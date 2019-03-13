@@ -5,11 +5,12 @@ date: 2019-03-12
 description: "mybatis"
 tag: other
 ---
-
 * 目录
 {:toc}
-### 前言
+
 看到公司项目中的 mapper 与 xml 中的代码写的十分规范与一致，后来才知道这些是可以通过 mybatis 工具自动生成，倒腾半天，终于可以实现自动生成，以后可以方便码代码啦，哈哈哈......果然，懒惰是推进社会进步的第一生产力。本来 mybatis 的MyBatisCodeHelper-Pro-1.6.6插件也可以实现，但貌似需要花费，就暂时搁置，先讲讲免费的吧，以后在补上。
+
+
 ### 准备阶段
 idea，mybatis-genetator-core-1.3.2.jar，mysql-connector-java-5.1.35.jar，generatorConfig.xml   
  [jar包下载](https://pan.baidu.com/s/1WOACd7QUUC6-JfGwBpickQ)
@@ -18,7 +19,7 @@ idea，mybatis-genetator-core-1.3.2.jar，mysql-connector-java-5.1.35.jar，gene
 ####  1.使用 cmd 执行 jar 包
 ##### 1.1 放置 jar 包与 xml 文件
 不管是 maven 工程还是 web 工程都可以，将两个文件的位置可以随意放置，可以不放在一起（但为了方便操作，我将其都放置在 resources 目录下）
-![这里写图片描述](https://img-blog.csdn.net/20180729170211551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+<img src="/images/posts/mybatis-genetator-core/1.png" height="300" width="800"> 
 ##### 1.2 编辑 generatorConfig.xml文件
 `target*`这里都写本地的绝对路径，否则会报错`The specified target project directory src/main/java does not exist`
 
@@ -76,7 +77,7 @@ idea，mybatis-genetator-core-1.3.2.jar，mysql-connector-java-5.1.35.jar，gene
 ```
 java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -overwrite
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180729172247689?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+<img src="/images/posts/mybatis-genetator-core/2.png" height="300" width="600"> 
  ps : 若两个文件不在同一目录下，就自行添加 jar 包，xml 的相对路径（相对于打开 dos 窗口的路径）
 ####  2.使用 maven 的 plugin
 ##### 2.1 在pom.xml中加入jar包与plugin
@@ -99,9 +100,11 @@ java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -over
 ```
 
 右边会出现 mybatis-generator
-![这里写图片描述](https://img-blog.csdn.net/20180729173221315?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+<img src="/images/posts/mybatis-genetator-core/3.png" height="300" width="600"> 
 ##### 2.2 修改generatorConfig.xml文件
-![这里写图片描述](https://img-blog.csdn.net/20180729175927997?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+<img src="/images/posts/mybatis-genetator-core/4.png" height="300" width="600"> 
+
 `target*` 使用相对路径
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -155,7 +158,8 @@ java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -over
 </generatorConfiguration>
 ```
 ##### 2.3 双击`mybatis-generator:generate`,运行 plugin
-![这里写图片描述](https://img-blog.csdn.net/2018072917371161?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+<img src="/images/posts/mybatis-genetator-core/5.png" height="300" width="800"> 
 
 ### 最后效果
 mapper 文件
@@ -292,8 +296,7 @@ xml 文件
 3. 没有Criteria方法生成，没有bySelective方法
 
 将`<context id="mysqlgenerator" targetRuntime="MyBatis3Simple">`改成`<context id="mysqlgenerator" targetRuntime="MyBatis3">`
-![这里写图片描述](https://img-blog.csdn.net/20180729174810921?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoZXJyeV94aXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
+<img src="/images/posts/mybatis-genetator-core/6.png" height="300" width="600"> 
 
 
 ###  感谢
