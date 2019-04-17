@@ -238,9 +238,13 @@ postman调用
 
 ### postman的使用
 
-<img src="/images/posts/springmvc_accept_list/20190415.png" height="200" width="600"> 
+<img src="/images/posts/springmvc_accept_list/20190415.png" height="300" width="800"> 
 
+### 附加
 
+@RequestBody只适合contentType为application/json或x-www-form-urlencoded, 不适用与form-data;
+
+如果要有multipartFile类型的数据需要上传,需要利用form-data,接口上不能使用@RequestBody, 否则报`Failed to instantiate [java.util.List]: Specified class is an interface;`,参数错误，参数封装出了问题.
 
 ### 感谢
 
