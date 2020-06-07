@@ -44,7 +44,6 @@ tag: mysql
     ```
     flush privileges;
     ```
-
 11. 退出 quit
 
 12. 注销系统，再进入，使用用户名root和刚才设置的新密码登录
