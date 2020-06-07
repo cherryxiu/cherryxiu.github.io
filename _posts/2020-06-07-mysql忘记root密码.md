@@ -31,14 +31,14 @@ tag: mysql
 update user set authentication_string=password('123456') where user='root' and host='localhost'; // 需要调用mysql的password函数，进行加密
 ```
 
-8. 之后刷新权限（必须步骤）：
+10. 之后刷新权限（必须步骤）：
 
 ```
 flush privileges;
 ```
 
-9.  退出 quit
-10. 注销系统，再进入，使用用户名root和刚才设置的新密码登录
+11.  退出 quit
+12. 注销系统，再进入，使用用户名root和刚才设置的新密码登录
 
 > 如果不行，找到mysql的安装位置，打开my.ini文件，在[mysqld]下输入语句：skip-grant-tables，保存即可。
 
