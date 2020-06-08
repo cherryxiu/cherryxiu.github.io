@@ -1,0 +1,105 @@
+I"�<p>​	本来用hexo + github 已经搭建好啦，可是由于喜欢的模板是用jekyll + github 搭建的，所以又重新搭建了一遍，写下教程，以防以后踩上相同的坑！！！这次搭建用的是 windows7 的系统~其它的请另行百度。</p>
+
+<h2 id="正文">正文</h2>
+
+<h3 id="步骤预览">步骤预览</h3>
+
+<ol>
+  <li>
+    <p>下载安装Git</p>
+  </li>
+  <li>
+    <p>安装ruby &amp; Devkit</p>
+  </li>
+  <li>
+    <p>安装 jekyll</p>
+  </li>
+  <li>
+    <p>搭建博客</p>
+  </li>
+</ol>
+
+<h3 id="1安装-git">1.安装 Git</h3>
+
+<p><a href="https://blog.csdn.net/monica1_1/article/details/80886048">git安装教程</a></p>
+
+<h3 id="2安装-ruby--devkit">2.安装 ruby &amp; Devkit</h3>
+
+<p><a href="https://jingyan.baidu.com/article/48b558e33558ac7f38c09aee.html">ruby&amp; Devkit 安装教程</a></p>
+
+<p>可能现在网站已经更新，选择对应的版本就好</p>
+
+<h3 id="3安装-jekyll">3.安装 jekyll</h3>
+
+<p>先查看你的gem是否安装完毕</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem -v
+
+gem install jekyll
+
+jekyll -v
+
+</code></pre></div></div>
+
+<h3 id="4搭建-jekyll-项目">4.搭建 jekyll 项目</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new myblog
+
+cd myblog
+
+jekyll s （或者 jekyll serve）
+</code></pre></div></div>
+
+<p>如果报错，按照提示，安装相关的gem</p>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/1195023-b36b8899925c4601.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/571" alt="img" /></p>
+
+<p>运行成功，就访问 <code class="language-plaintext highlighter-rouge">localhost:4000</code> 即可</p>
+
+<h3 id="5部署到-github-pages">5.部署到 github pages</h3>
+
+<p>应该是我的另一篇 <a href="https://cherryxiu.github.io/2019/02/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">hexo + github搭建博客</a> 中的那步差不多，就不重复啦。（虽然我也没有尝试过）</p>
+
+<h3 id="利用已有的开源-jekyll-项目">利用已有的开源 jekyll 项目</h3>
+
+<p>​    其实可以直接利用别人的模板，再细节修改自己需要的内容，可以带来更大舒适感，哈哈哈哈哈~其实就是懒，我用的是 <code class="language-plaintext highlighter-rouge">leopardpan.github.io</code>的博客模板。</p>
+
+<ol>
+  <li>
+    <p>克隆项目到本地【在 <code class="language-plaintext highlighter-rouge">E:\blog</code>下用git bashed 执行命令 】</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/leopardpan/leopardpan.github.io.git
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>在 <code class="language-plaintext highlighter-rouge">E:\blog\leopardpan.github.io\</code>下用 cmd 执行命令</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build
+jekyll s
+</code></pre></div>    </div>
+
+    <p>访问 <code class="language-plaintext highlighter-rouge">localhost:4000</code>就可以访问本地博客</p>
+  </li>
+  <li>
+    <p>修改<code class="language-plaintext highlighter-rouge">E:\blog\leopardpan.github.io\.git</code> 中的 config 文件中的url，改成自己的 github 库，用git bashed 执行命令</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin master
+git add .
+git commit -m "commit"
+git push origin master
+</code></pre></div>    </div>
+
+    <p>输入 github 用户名，密码，会发现已经提交到自己的github上啦，访问<code class="language-plaintext highlighter-rouge">自己用户名/github.io</code>即可</p>
+  </li>
+  <li>
+    <p>编写 blog</p>
+
+    <p><code class="language-plaintext highlighter-rouge">E:\blog\leopardpan.github.io\_posts</code> 中存在博客文件，注意：必须以<code class="language-plaintext highlighter-rouge">年-月-日-博客名</code>命名才可以，执行<code class="language-plaintext highlighter-rouge">jekyll s</code>即可</p>
+  </li>
+</ol>
+
+<h3 id="other">other</h3>
+<ul>
+  <li><a href="https://www.xuebuyuan.com/2107872.html">使用 GitHub, Jekyll 打造自己的免费独立博客</a></li>
+</ul>
+:ET

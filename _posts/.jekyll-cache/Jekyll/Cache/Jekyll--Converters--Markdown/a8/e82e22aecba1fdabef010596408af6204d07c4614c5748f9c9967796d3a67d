@@ -1,0 +1,134 @@
+I"D)<p>​	本章介绍将 varchar 类型的数据， 按照其数值排序的几种方法总结.</p>
+
+<h3 id="前言">前言</h3>
+
+<p>因为一开始对于字段采用的是varchar类型, 可是直接用varchar这字符型排序,字符从左向右依次比较,会与预期不一样的结果.如果直接改mysql数据类型, 可能涉及其他业务逻辑. 因而需要在sql上进行修改.特此记录一下</p>
+
+<h3 id="准备工作">准备工作</h3>
+
+<p>mysql</p>
+
+<h3 id="varchar排序问题">varchar排序问题</h3>
+
+<ol>
+  <li>
+    <p>源数据</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/1.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>varchar 的排序问题</p>
+
+    <p>因为按照字符排序, 先对比个位数, 3比1大, 导致出现3出现在 12前面的情况</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">call_cnt</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/2.png" height="300" width="600" /></p>
+  </li>
+</ol>
+
+<h3 id="解决方法总结">解决方法总结</h3>
+
+<ol>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">order by m.call_cnt + 0</code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">call_cnt</span> <span class="o">+</span> <span class="mi">0</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/3.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">order by m.call_cnt * 1</code></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name,call_cnt FROM cl_user_contacts_1 where upload_id="633" ORDER BY call_cnt * 1 DESC
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/4.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">ORDER BY -call_cnt</code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="o">-</span><span class="n">call_cnt</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/5.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">ORDER BY ABS(call_cnt)</code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">ABS</span><span class="p">(</span><span class="n">call_cnt</span><span class="p">)</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/6.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">ORDER BY CAST(call_cnt AS SIGNED) </code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">CAST</span><span class="p">(</span><span class="n">call_cnt</span> <span class="k">AS</span> <span class="nb">SIGNED</span><span class="p">)</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/7.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">ORDER BY CONVERT(call_cnt , SIGNED)</code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">CONVERT</span><span class="p">(</span><span class="n">call_cnt</span> <span class="p">,</span> <span class="nb">SIGNED</span><span class="p">)</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/8.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">ORDER BY LENGTH(call_cnt), call_cnt+0 </code></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">call_cnt</span> <span class="k">FROM</span> <span class="n">cl_user_contacts_1</span> <span class="k">where</span> <span class="n">upload_id</span><span class="o">=</span><span class="nv">"633"</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">LENGTH</span><span class="p">(</span><span class="n">call_cnt</span><span class="p">)</span> <span class="k">DESC</span><span class="p">,</span><span class="n">call_cnt</span><span class="o">+</span><span class="mi">0</span> <span class="k">DESC</span>
+</code></pre></div>    </div>
+
+    <p><img src="/images/posts/mysql_varchar_orderby/9.png" height="300" width="600" /></p>
+  </li>
+  <li>
+    <p>使用<code class="language-plaintext highlighter-rouge">使用pageHelper插件</code></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PageHelper</span><span class="o">.</span><span class="na">startPage</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">pageSize</span><span class="o">);</span>
+<span class="nc">PageHelper</span><span class="o">.</span><span class="na">orderby</span><span class="o">(</span><span class="s">"m.call_cnt+0 desc"</span><span class="o">)</span>
+<span class="o">(</span><span class="nc">Page</span><span class="o">&lt;</span><span class="nc">UserContacts</span><span class="o">&gt;)</span> <span class="n">list</span> <span class="o">=</span> <span class="n">userContactsMapper</span><span class="o">.</span><span class="na">listShardSelective</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="n">searchMap</span><span class="o">);</span>
+   
+<span class="c1">//或者</span>
+<span class="nc">PageHelper</span><span class="o">.</span><span class="na">startPage</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">pageSize</span><span class="o">,</span> <span class="s">"m.call_cnt+0 desc"</span><span class="o">);</span>
+<span class="o">(</span><span class="nc">Page</span><span class="o">&lt;</span><span class="nc">UserContacts</span><span class="o">&gt;)</span> <span class="n">list</span> <span class="o">=</span> <span class="n">userContactsMapper</span><span class="o">.</span><span class="na">listShardSelective</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="n">searchMap</span><span class="o">);</span> 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="实际bug">实际bug</h3>
+
+<p>[bug]项目中正常使用pageHelper分页,mybatis使用<code class="language-plaintext highlighter-rouge">order by call_cnt+0 desc</code>降序排列, call_cnt不为空时的排列是正常的, 可当值为null时, 分页查询就出现重复啦, 就是有的数据即在第一页显示, 有在第二页显示.</p>
+
+<p>解决办法:</p>
+
+<ul>
+  <li>办法1:为call_cnt添加索引, 为null值的数据会按索引排序</li>
+  <li>办法2:添加用id排序,即<code class="language-plaintext highlighter-rouge">order by call_cnt+0 desc,id desc</code>.值都为null的话用id降序排列</li>
+</ul>
+
+<h3 id="最后">最后</h3>
+
+<blockquote>
+  <p>附加知识点:</p>
+
+  <p>​    二进制，同带binary前缀的效果 : BINARY  <br />
+​    字符型，可带参数 : CHAR()   <br />
+​    日期 : DATE   <br />
+​    时间: TIME   <br />
+​    日期时间型 : DATETIME   <br />
+​    浮点数 : DECIMAL    <br />
+​    整数 : SIGNED   <br />
+​    无符号整数 : UNSIGNED</p>
+</blockquote>
+
+<p>感谢百度, 具体来源不记得啦.哈哈哈~如果有帮助, 请多多指教.</p>
+:ET

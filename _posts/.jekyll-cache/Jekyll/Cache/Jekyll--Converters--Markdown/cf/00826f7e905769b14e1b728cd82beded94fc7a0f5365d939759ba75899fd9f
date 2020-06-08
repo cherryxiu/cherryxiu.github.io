@@ -1,0 +1,246 @@
+I"=<ul id="markdown-toc">
+  <li><a href="#背景" id="markdown-toc-背景">背景</a></li>
+  <li><a href="#错误写法" id="markdown-toc-错误写法">错误写法</a>    <ul>
+      <li><a href="#错误写法1" id="markdown-toc-错误写法1">错误写法1</a></li>
+      <li><a href="#错误写法2" id="markdown-toc-错误写法2">错误写法2</a></li>
+    </ul>
+  </li>
+  <li><a href="#正确写法" id="markdown-toc-正确写法">正确写法</a>    <ul>
+      <li><a href="#1-对于只有一个baseinfo实体" id="markdown-toc-1-对于只有一个baseinfo实体">1. 对于只有一个<code class="language-plaintext highlighter-rouge">BaseInfo</code>实体</a></li>
+      <li><a href="#2-对于只有一个listbaseinfo-baseinfo的参数" id="markdown-toc-2-对于只有一个listbaseinfo-baseinfo的参数">2. 对于只有一个<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code>的参数</a></li>
+      <li><a href="#3-对于有两个参数listbaseinfo-baseinfo-和-string-id" id="markdown-toc-3-对于有两个参数listbaseinfo-baseinfo-和-string-id">3. 对于有两个参数<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code> 和 <code class="language-plaintext highlighter-rouge">String id</code></a></li>
+      <li><a href="#4-对于有两个参数listbaseinfo-baseinfo-和-string-id-且多层嵌套" id="markdown-toc-4-对于有两个参数listbaseinfo-baseinfo-和-string-id-且多层嵌套">4. 对于有两个参数<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code> 和 <code class="language-plaintext highlighter-rouge">String id</code> ,且多层嵌套</a></li>
+    </ul>
+  </li>
+  <li><a href="#postman的使用" id="markdown-toc-postman的使用">postman的使用</a></li>
+  <li><a href="#附加" id="markdown-toc-附加">附加</a></li>
+  <li><a href="#感谢" id="markdown-toc-感谢">感谢</a></li>
+</ul>
+<h3 id="背景">背景</h3>
+
+<p>后台需要接收前端传来的好几条数据, 分别进行修改或保存操作.于是想到用Object实体类封装, 一般一条数据用<code class="language-plaintext highlighter-rouge">@RequestBody Model model</code>是没有问题的,想着多条数据用<code class="language-plaintext highlighter-rouge">List&lt;Model&gt; model</code>接收就行,没到并不可以, 就百度总结了一下</p>
+
+<h3 id="错误写法">错误写法</h3>
+
+<h4 id="错误写法1">错误写法1</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">BaseInfo</span><span class="o">&gt;</span> <span class="n">baseInfo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfo</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="错误写法2">错误写法2</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BaseInfo</span><span class="o">&gt;</span> <span class="n">baseInfo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfo</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="正确写法">正确写法</h3>
+
+<h4 id="1-对于只有一个baseinfo实体">1. 对于只有一个<code class="language-plaintext highlighter-rouge">BaseInfo</code>实体</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+* BseInfo实体类
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfo</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>controller</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PostMapping("saveBaseInfo")
+public void saveBaseInfo(@RequestBody BaseInfo baseInfo) {
+    service.saveBaseInfo(baseInfo);
+}
+</code></pre></div></div>
+
+<p>postman调用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   "name":"张三",
+   "phone":"123"
+}
+</code></pre></div></div>
+
+<h4 id="2-对于只有一个listbaseinfo-baseinfo的参数">2. 对于只有一个<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code>的参数</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+* BseInfo实体类
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfo</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+*BaseInfoModel
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfoModel</span><span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BaseInfo</span><span class="o">&gt;</span> <span class="n">baseInfoList</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>controller</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">BaseInfoModel</span> <span class="n">baseInfoModel</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfoModel</span><span class="o">.</span><span class="na">getBaseInfoList</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>postman调用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   "baseInfoList":[{
+      "name":"张三",
+   	  "phone":"123"
+   },{
+      "name":"张三",
+   	  "phone":"123"
+   }]
+}
+</code></pre></div></div>
+
+<h4 id="3-对于有两个参数listbaseinfo-baseinfo-和-string-id">3. 对于有两个参数<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code> 和 <code class="language-plaintext highlighter-rouge">String id</code></h4>
+
+<ul>
+  <li>参考办法</li>
+</ul>
+
+<p>参考<a href="https://blog.csdn.net/qq_22076345/article/details/80905460">@RequestBody 和 @RequestParam可以同时使用</a>, 下列这种用法我的项目是不可以的,报<code class="language-plaintext highlighter-rouge">Required String parameter 'id' is not present</code>异常,可能是版本不同的原因</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">BaseInfoModel</span> <span class="n">baseInfoModel</span><span class="o">,</span>
+						<span class="nd">@RequestParam</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"id"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfoModel</span><span class="o">.</span><span class="na">getBaseInfoList</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>解决办法</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+* BseInfo实体类
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfo</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+*BaseInfoModel
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfoModel</span><span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BaseInfo</span><span class="o">&gt;</span> <span class="n">baseInfoList</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span>  <span class="n">id</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>controller</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">BaseInfoModel</span> <span class="n">baseInfoModel</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfoModel</span><span class="o">.</span><span class="na">getBaseInfoList</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>postman调用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+	"id":"1",
+   "baseInfoList":[{
+      "name":"张三",
+   	  "phone":"123"
+   },{
+      "name":"张三",
+   	  "phone":"123"
+   }]
+}
+</code></pre></div></div>
+
+<h4 id="4-对于有两个参数listbaseinfo-baseinfo-和-string-id-且多层嵌套">4. 对于有两个参数<code class="language-plaintext highlighter-rouge">List&lt;BaseInfo&gt; baseInfo</code> 和 <code class="language-plaintext highlighter-rouge">String id</code> ,且多层嵌套</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+* phone实体类
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Phone</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">telphone</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">corporation</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+* BseInfo实体类
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfo</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Phone</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+*BaseInfoModel
+*/</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseInfoModel</span><span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BaseInfo</span><span class="o">&gt;</span> <span class="n">baseInfoList</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span>  <span class="n">id</span><span class="o">;</span>
+    <span class="c1">// 省略getter/setter方法</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>controller</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"saveBaseInfo"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveBaseInfo</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">BaseInfoModel</span> <span class="n">baseInfoModel</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">service</span><span class="o">.</span><span class="na">saveBaseInfo</span><span class="o">(</span><span class="n">baseInfoModel</span><span class="o">.</span><span class="na">getBaseInfoList</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>postman调用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+	"id":"1",
+   "baseInfoList":[{
+      "name":"张三",
+   	  "phone":{
+          "telphone":"123",
+          "corporation":"移动"
+   	  }
+   },{
+      "name":"张三",
+   	  "phone":{
+          "telphone":"123",
+          "corporation":"移动"
+   	  }
+   }]
+}
+</code></pre></div></div>
+
+<h3 id="postman的使用">postman的使用</h3>
+
+<p><img src="/images/posts/springmvc_accept_list/20190415.png" height="300" width="800" /></p>
+
+<h3 id="附加">附加</h3>
+
+<p>@RequestBody只适合contentType为application/json或x-www-form-urlencoded, 不适用与form-data;</p>
+
+<p>如果要有multipartFile类型的数据需要上传,需要利用form-data,接口上不能使用@RequestBody, 否则报<code class="language-plaintext highlighter-rouge">Failed to instantiate [java.util.List]: Specified class is an interface;</code>,参数错误，参数封装出了问题.</p>
+
+<h3 id="感谢">感谢</h3>
+
+<p><a href="https://blog.csdn.net/m0_37034294/article/details/84327937">postman传递list集合后台springmvc接受</a></p>
+
+:ET
