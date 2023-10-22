@@ -1,8 +1,20 @@
+#  MkDocs 配置 yml
+
+## 基础配置
+
+```yml
 # [Info]
-site_name: Cherryxiu的个人网站 # 左上角标题
+site_name: Cherryxiu 个人网站 # 左上角标题
 site_url: https://cherryxiu.github.io
-site_author: 刘秀
-site_description: 刘秀的个人网站
+site_author: LIU XIU
+site_description: LIU XIU的个人网站
+
+# [Navigtion]
+nav:
+   - 工具箱:
+     - tools/index.md
+     - tools/tools.md
+
 
 # [UI]
 ## [top]
@@ -30,25 +42,24 @@ theme:
     - search.highlight # 搜索出的文章关键词加入高亮
     - content.code.copy # 可以通过按钮复制代码
     - content.action.edit # 点击按钮跳转到编辑页面  需要结合 edit_uri 一起使用
-    - content.action.view # 查看页面源代码
   language: zh # 一些提示性的文字会变成中文
   icon:
     repo: fontawesome/brands/github
 edit_uri: edit/main/docs # 编辑按钮跳转的链接
 ## [top-right corner]
-repo_url: https://github.com/cherryxiu/cherryxiu.github.io # 右上角点击跳转的链接
-repo_name: cherryxiu.github.io # 右上角的名字
+repo_url: https://github.com/Yang-Xijie/yang-xijie.github.io # 右上角点击跳转的链接
+repo_name: yang-xijie.github.io # 右上角的名字
 ## [bottom-left corner]
-copyright: Copyright@刘秀 - 人生苦短，不必设限 # 左下角的版权声明
+copyright: 杨希杰 CC-BY-4.0 # 左下角的版权声明
 ## [bottom-right corner]
 extra:
   social: # icons
-##    - icon: fontawesome/brands/bilibili
-##      link: https://space.bilibili.com/24502827
-##     name: Bilibili | 杨希杰619 # 鼠标悬浮提示
+    - icon: fontawesome/brands/bilibili
+      link: https://space.bilibili.com/24502827
+      name: Bilibili | 杨希杰619 # 鼠标悬浮提示
     - icon: fontawesome/brands/github
-      link: https://github.com/cherryxiu
-      name: GitHub | Cherryxiu
+      link: https://github.com/Yang-Xijie
+      name: GitHub | Yang-Xijie
 
 # [Extensions]
 plugins:
@@ -65,13 +76,12 @@ markdown_extensions:
   - toc:
       permalink: true # 固定标题位置为当前位置
   - pymdownx.highlight: # 代码块高亮
-      linenums: true # 显示行号
-      auto_title: true # 显示编程语言名称
+      # linenums: true # 显示行号
+      # auto_title: true # 显示编程语言名称
   - pymdownx.superfences # 代码块高亮插件
   - meta # 支持Markdown文件上方自定义标题标签等
   - admonition # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#inline-blocks
   - pymdownx.details # admonition需要
-  - markdown.extensions.attr_list
 
 extra_javascript:
   # latex支持
@@ -80,26 +90,18 @@ extra_javascript:
   - mkdocs/javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js # https://cdn.bytedance.com/?query=mathjax&version=3.2.0
-  - mkdocs/javascripts/simpleLightbox.js # 图片放大
-  - mkdocs/javascripts/custom.js # 图片放大
 extra_css:
   - mkdocs/css/no-footer.css # 不使用底部的翻页
-  - mkdocs/css/simpleLightbox.scss # 图片放大
-  - mkdocs/css/custom.css # 图片放大
-  
-  # [Navigtion]
-nav:
-#  - 博客:
-#  - Git:
-#  - ARTS:
-#  - 随笔:
-   - 工具箱:
-     - tools/index.md
-     - 网站盒子: tools/tools.md
-   - ABOUT:
-     - about/index.md
-     - 关于我: about/about_me.md
-     - 博客搭建指南: about/blog_build.md
-     - MkDocs 配置 yml: about/mkdocs.md
-     - Markdown 指南: about/markdown.md
-    
+  - mkdocs/css/unordered-list-symbols.css # multiplt unordered list symbols
+```
+
+## 图片放大
+
+https://segmentfault.com/a/1190000018592279
+
+## 流程图、序列图
+
+https://blog.csdn.net/chuhanning9279/article/details/100970174
+
+
+
