@@ -1,13 +1,70 @@
-# [Info]
+# Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+
+# Project information
 site_name: Cherryxiu的个人网站 # 左上角标题
 site_url: https://cherryxiu.github.io
 site_author: 刘秀
 site_description: 刘秀的个人网站
 
-# [UI]
-## [top]
+# Repository
+repo_name: cherryxiu.github.io # 右上角的名字
+repo_url: https://github.com/cherryxiu/cherryxiu.github.io # 右上角点击跳转的链接
+
+# Copyright
+copyright: Copyright@刘秀 - 人生苦短，不必设限 # 左下角的版权声明
+
+edit_uri: edit/main/docs # 编辑按钮跳转的链接
+
+# Configuration
 theme:
   name: material
+  custom_dir: material/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit # 点击按钮跳转到编辑页面  需要结合 edit_uri 一起使用
+    - content.action.view # 查看页面源代码
+    - content.code.annotate
+    - content.code.copy # 可以通过按钮复制代码
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand # 打开Tab时左侧目录全部展开
+    - navigation.footer
+    - navigation.indexes # Tab会有一个index.md 而不是在打开Tab时打开第一篇文章
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs # 使用Tab来进行分类
+    # - navigation.tabs.sticky
+    - navigation.top # 返回顶部的按钮 在上滑时出现
+    - navigation.tracking
+    - search.highlight # 搜索出的文章关键词加入高亮
+    - search.share 
+    - search.suggest # 搜索输入一些字母时推荐补全整个单词
+    - toc.follow
+    # - toc.integrate
   palette:
     - scheme: default # 日间模式
       primary: indigo # 上方的
@@ -21,73 +78,91 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: 切换至日间模式
-  features:
-    - navigation.tabs # 使用Tab来进行分类
-    - navigation.top # 返回顶部的按钮 在上滑时出现
-    - navigation.indexes # Tab会有一个index.md 而不是在打开Tab时打开第一篇文章
-    - navigation.expand # 打开Tab时左侧目录全部展开
-    - search.suggest # 搜索输入一些字母时推荐补全整个单词
-    - search.highlight # 搜索出的文章关键词加入高亮
-    - content.code.copy # 可以通过按钮复制代码
-    - content.action.edit # 点击按钮跳转到编辑页面  需要结合 edit_uri 一起使用
-    - content.action.view # 查看页面源代码
-  language: zh # 一些提示性的文字会变成中文
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png # 左上角logo图片
   icon:
+    logo: logo
     repo: fontawesome/brands/github
-edit_uri: edit/main/docs # 编辑按钮跳转的链接
-## [top-right corner]
-repo_url: https://github.com/cherryxiu/cherryxiu.github.io # 右上角点击跳转的链接
-repo_name: cherryxiu.github.io # 右上角的名字
-## [bottom-left corner]
-copyright: Copyright@刘秀 - 人生苦短，不必设限 # 左下角的版权声明
-## [bottom-right corner]
+
+# Plugins
+plugins:
+  - blog
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+  - material/overrides/hooks/translations.py
+
+# Additional configuration
 extra:
-  social: # icons
-##    - icon: fontawesome/brands/bilibili
-##      link: https://space.bilibili.com/24502827
-##     name: Bilibili | 杨希杰619 # 鼠标悬浮提示
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
     - icon: fontawesome/brands/github
       link: https://github.com/cherryxiu
       name: GitHub | Cherryxiu
 
-# [Extensions]
-plugins:
-  - search: # 现在还不支持中文搜索 支持之后可以设置语言
-    # insider已经支持中文的分词搜索了 https://squidfunk.github.io/mkdocs-material/blog/2022/chinese-search-support/
-      lang:
-        - en
-        - ja
-  - tags # 给单篇文章添加标签 https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/?h=tags
+# Extensions
 markdown_extensions:
-  - pymdownx.arithmatex: # latex支持
-      generic: true
-  - attr_list # 给图片后面添加{width="300"}设置大小
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
   - toc:
-      permalink: true # 固定标题位置为当前位置
-  - pymdownx.highlight: # 代码块高亮
-      linenums: true # 显示行号
-      auto_title: true # 显示编程语言名称
-  - pymdownx.superfences # 代码块高亮插件
-  - meta # 支持Markdown文件上方自定义标题标签等
-  - admonition # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#inline-blocks
-  - pymdownx.details # admonition需要
-  - markdown.extensions.attr_list
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
-extra_javascript:
-  # latex支持
-  # check https://squidfunk.github.io/mkdocs-material/reference/mathjax/?h=math for more information
-  # notice `curl https://polyfill.io/v3/polyfill.min.js?features=es6 > docs/mkdocs/javascripts/polyfill.min.js && curl https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js > docs/mkdocs/javascripts/tex-mml-chtml.js` not works... because there are other resources that need to load
-  - mkdocs/javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js # https://cdn.bytedance.com/?query=mathjax&version=3.2.0
-  #- mkdocs/javascripts/simpleLightbox.js # 图片放大
-  #- mkdocs/javascripts/custom.js # 图片放大
-extra_css:
-  - mkdocs/css/no-footer.css # 不使用底部的翻页
-  #- mkdocs/css/simpleLightbox.scss # 图片放大
-  #- mkdocs/css/custom.css # 图片放大
-  
-  # [Navigtion]
+# Page tree
 nav:
 #  - 博客:
 #  - Git:
@@ -102,4 +177,3 @@ nav:
      - 博客搭建指南: about/blog_build.md
      - MkDocs 配置 yml: about/mkdocs.md
      - Markdown 指南: about/markdown.md
-    
