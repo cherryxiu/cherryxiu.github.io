@@ -65,6 +65,7 @@ theme:
     - search.suggest # 搜索输入一些字母时推荐补全整个单词
     - toc.follow
     # - toc.integrate
+  language: zh # 一些提示性的文字会变成中文
   palette:
     - scheme: default # 日间模式
       primary: indigo # 上方的
@@ -91,9 +92,14 @@ plugins:
   - blog
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+      # insider已经支持中文的分词搜索了 https://squidfunk.github.io/mkdocs-material/blog/2022/chinese-search-support/
+      lang:
+        - en
+        - ja
   - minify:
       minify_html: true
-
+  - tags # 给单篇文章添加标签 https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/?h=tags
+  
 # Hooks
 hooks:
   - material/overrides/hooks/shortcodes.py
@@ -166,7 +172,9 @@ markdown_extensions:
 nav:
 #  - 博客:
 #  - Git:
-#  - ARTS:
+   - ARTS:
+     - arts/index.md
+     - 0407_两数之和: arts/arts_20240407.md
 #  - 随笔:
    - 工具箱:
      - tools/index.md

@@ -131,3 +131,9 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 [SSH 密钥生成 GitHub 官方方法](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+### connot find moudle minify
+
+执行`pip install mkdocs-minify-plugin`
+
+[mkdocs - Config value: ‘plugins‘. Error: The “minify“ plugin is not installed](https://blog.csdn.net/LostSpeed/article/details/127192772)
