@@ -94,7 +94,7 @@ _ _ _     <-- 下划线
 
 ***
 
-* * * 
+* * *
 
 ---
 
@@ -280,11 +280,43 @@ print 'Hello World'
 | 居中 | 居中 | 居右 |
 | 居中 | 居中 | 居右 |
 
+## fontawesome样式
+
+https://fontawesome.com/search
+
+```
+:fontawesome-solid-earth-americas:
+
+:fontawesome-solid-poo:
+
+:fontawesome-brands-youtube:{ style="color: #EE0F0F" }
+```
+
+:fontawesome-solid-earth-americas:
+
+:fontawesome-solid-poo:
+
+:fontawesome-brands-youtube:{ style="color: #EE0F0F" }
+
+## material 样式
+
+https://pictogrammers.com/library/mdi/
+
+```
+:material-file-tree: 
+:material-emoticon-poop-outline: 
+```
+
+:material-file-tree: 
+:material-emoticon-poop-outline: 
+
+
+
 ## 时序图 todo
 
 
 
-## 布局todo
+## card布局
 
 <div class="grid cards" markdown>
 
