@@ -10,6 +10,7 @@
 - 缓存区 index
 - 本地 git 仓库 repository
 - 远端 git 仓库 repository
+- ![material](../mkdocs/img/7.png)
 
 ![material](../mkdocs/img/1.png)
 
