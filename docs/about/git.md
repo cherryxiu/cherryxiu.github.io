@@ -4,7 +4,7 @@
 
 
 
-![avatar](../mkdocs/img/7.png)
+![material](../mkdocs/img/7.png)
 
 - 工作目录 working tree
 - 缓存区 index
