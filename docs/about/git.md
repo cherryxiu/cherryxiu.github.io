@@ -2,10 +2,6 @@
 
 ##### git 工作区介绍
 
-
-
-![material](../mkdocs/img/7.png)
-
 - 工作目录 working tree
 
 - 缓存区 index
@@ -22,9 +18,7 @@
 
   
 
-  ![material](../mkdocs/img/7.png)
-
-![material](../mkdocs/img/1.png)
+  ![material](http://raw.githubusercontent.com/cherryxiu/image/master/mkdocs/7.png)
 
 ##### 工作主要流程
 
@@ -40,7 +34,7 @@
 
 ##### 文件状态转变
 
-![avatar](../mkdocs/img/8.png)
+![avatar](http://raw.githubusercontent.com/cherryxiu/image/master/mkdocs/10.png)
 
 - **Untracked**: 未跟踪, 此文件在文件夹中, 但并没有加入到 git 库, 不参与版本控制. 通过 `git add` 状态变为 Staged.
 - **Unmodify**:  文件已经入库, 未修改, 即版本库中的文件快照内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为 Modified .如果使用 `git rm` 移出版本库, 则成为 Untracked 文件

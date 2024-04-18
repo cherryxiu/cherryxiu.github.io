@@ -188,6 +188,6 @@ nav:
      - 博客搭建指南: about/blog_build.md
      - MkDocs 配置 yml: about/mkdocs.md
      - Markdown 指南: about/markdown.md
-     # - Git 指南: about/git.md
-     # - Angular 指南: about/angular.md
-     # - Oracle 指南: about/oracle.md
+     - Git 指南: about/git.md
+     - Angular 指南: about/angular.md
+     - Oracle 指南: about/oracle.md
