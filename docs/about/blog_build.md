@@ -137,3 +137,22 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 执行`pip install mkdocs-minify-plugin`
 
 [mkdocs - Config value: ‘plugins‘. Error: The “minify“ plugin is not installed](https://blog.csdn.net/LostSpeed/article/details/127192772)
+
+## 其他辅助工具
+
+#### typora：编写文档
+
+Typora是一款轻量级的Markdown编辑器, 所见即所得!
+
+#### PicGo+GitHub搭建图床
+
+[构建自己的图床：GitHub+PicGo+Typora自动上传 ](https://news.sohu.com/a/742731165_121096586)
+
+[raw.githubusercontent.com与github什么关系](https://blog.csdn.net/The_Time_Runner/article/details/89737949)
+
+使用typera自动插入图片，picgo会自动将图片上传至对应图床，并转换对应的地址，这样就不用考虑图片与文件之间的路径问题了。
+
+例如：
+
+`![avatar](https://raw.githubusercontent.com/cherryxiu/image/master/mkdocs/10.png)`
+

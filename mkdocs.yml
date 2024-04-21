@@ -61,7 +61,7 @@ theme:
     - navigation.top # 返回顶部的按钮 在上滑时出现
     - navigation.tracking
     - search.highlight # 搜索出的文章关键词加入高亮
-    - search.share 
+    - search.share
     - search.suggest # 搜索输入一些字母时推荐补全整个单词
     - toc.follow
     # - toc.integrate
@@ -99,7 +99,7 @@ plugins:
   - minify:
       minify_html: true
   - tags # 给单篇文章添加标签 https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/?h=tags
-  
+
 # Hooks
 hooks:
   - material/overrides/hooks/shortcodes.py
@@ -188,6 +188,7 @@ nav:
      - 博客搭建指南: about/blog_build.md
      - MkDocs 配置 yml: about/mkdocs.md
      - Markdown 指南: about/markdown.md
+     - Typora 指南: about/typora.md
      - Git 指南: about/git.md
      - Angular 指南: about/angular.md
      - Oracle 指南: about/oracle.md
