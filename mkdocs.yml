@@ -170,14 +170,19 @@ markdown_extensions:
 
 # Page tree
 nav:
-#  - 博客:
-#  - Git:
+   - 博客:
+     - weblog/index.md
+     - python 启动WinSCP: weblog/winscp.md
+     - bat-windows批处理: weblog/bat.md
+     - 按先入先出法计算数据: weblog/fifo.md
+     - Oracle导致ORA08103报错: weblog/ora08103.md
    - ARTS:
      - arts/index.md
      - 0404_有效的括号: arts/20240404.md
      - 0405_两数之和: arts/20240405.md
      - 0406_合并两个有序链表: arts/20240406.md
      - 0407_删除数组重复项: arts/20240407.md
+     - 0814_寻找数组的中心索引: arts/20240814.md
 #  - 随笔:
    - 工具箱:
      - tools/index.md
@@ -193,3 +198,4 @@ nav:
      - Angular 指南: about/angular.md
      - Oracle 指南: about/oracle.md
      - QDII-FE 格式化: about/qdiife.md
+     

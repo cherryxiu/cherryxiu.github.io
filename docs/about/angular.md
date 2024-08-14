@@ -38,3 +38,10 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
 ```
 
+### 创建component
+
+```
+加上--spec false为了防止创建测试文件
+# ng g c header --spec false
+```
+
