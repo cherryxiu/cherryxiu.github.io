@@ -45,3 +45,74 @@ cnpm install
 # ng g c header --spec false
 ```
 
+### 5. new Set去重 
+
+```
+var participantnoList = [...new Set(this.publicTable?.checkedData.map((item: any) => item.participantno))];
+```
+
+### 6. 数组合并 [...series1, ...series2];
+
+```
+series = [...series1, ...series2];
+```
+
+### 7. 深度复制对象
+
+```
+import _ from 'lodash';
+
+handleDataset(calendarObj: any[], fundDataObj: any[], participantDataObj: any[]) {
+    // 深拷贝
+    const calendar = _.cloneDeep(calendarObj);
+    const fundData = _.cloneDeep(fundDataObj);
+    const participantData = _.cloneDeep(participantDataObj);
+
+}
+```
+
+### 8. 比较两对象是否相等 loadsh
+
+```
+import _ from 'lodash';
+
+
+// 表格勾选时系列变化
+  ngDoCheck() {
+    if (!_.isEqual(this.previousCheckdata, this.publicTable?.checkedData)) {
+      // 不相等时的逻辑处理
+      }
+    }
+  }
+
+```
+
+### 9. filter， map， foreach
+
+```
+// filter
+var fundData = this.publicTable?.checkedData.filter((y: any) => {
+    return y.stklongname == x.stklongname && y.participantno == x.participantno;
+})
+
+var fundData = this.originFundData.filter((x: any) => stklongnameList.indexOf(x.type) != -1);
+
+// map
+calendar.map((calendar: any) => {
+            fundData.forEach((fund: any) => {
+              if (calendar.busidate == fund.busidate) {
+                calendar[fund.type] = Number(fund.amount);
+                calendar[fund.type + '-' + 'style'] = { opacity: 0 };
+              }
+            });
+            participantData.forEach((participant: any) => {
+              if (calendar.busidate == participant.busidate) {
+                calendar[participant.type] = Number(participant.amount);
+                calendar[participant.type + '-' + 'stack'] = participant.type.substring(0, participant.type.length - 7);
+                calendar[participant.type + '-' + 'style'] = { opacity: 0.3 };
+              }
+            });
+            return calendar;
+          })
+
+```
