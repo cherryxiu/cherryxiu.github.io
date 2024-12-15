@@ -198,5 +198,6 @@ nav:
      - Git 指南: about/git.md
      - Angular 指南: about/angular.md
      - Oracle 指南: about/oracle.md
+     - echarts 指南: about/echarts.md
      - QDII-FE 格式化: about/qdiife.md
      
