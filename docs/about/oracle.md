@@ -7,7 +7,7 @@ count(1)
 0
 ```
 
-如果子查询`select deptno from emp`中包含空值，not in (空值)返回为空
+如果子查询`select deptno from emp`中包含空值，not in (空值)返回为空； in (空值) 正常返回数据。
 
 ###  2. translate
 

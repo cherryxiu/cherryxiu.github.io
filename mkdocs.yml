@@ -178,6 +178,8 @@ nav:
      - Oracle导致ORA08103报错: weblog/ora08103.md
      - Angular页签跳转及父子组件调用: weblog/angular-emit.md
      - JSON字符串映射为实体类: weblog/json-readvalue.md
+     - JAVA异步处理: weblog/runAsync.md
+     - 自定义公式取数sql: weblog/f_str_calc.md
    - ARTS:
      - arts/index.md
      - 0404_有效的括号: arts/20240404.md
