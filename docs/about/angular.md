@@ -116,3 +116,13 @@ calendar.map((calendar: any) => {
           })
 
 ```
+
+### 10. ANGULAR 启动报错打开文件过多
+
+```
+# 修改增大允许打开的文件数 too many open files(打开的文件过多)解决方法
+# ulimit -n 65535 
+# 启动项目
+# ng serve --proxy-config src/proxy.conf.json --host 172.21.6.171 --open
+```
+
